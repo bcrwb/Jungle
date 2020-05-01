@@ -4,10 +4,31 @@
     <h1>Order #<%= @order.id %></h1>
   </header>
 
-  <div class="order-summary jumbotron">
-    <h4>Thank you for your order!</h4>
+      <h1> Order Items </h1>
+    <% @order.line_items.each do |item|%>
+    
+      <li>
+      <%= "x#{item.quantity}"%>
+      <%=  item.product.name %>
+      <%= image_tag item.product.image, :height => '55' %>
+      <br>
+      <%= item.product.description%>
+      
+      </li>
+      <br>
+      <% end%>
+       
+      </ul>
+      <h2>Total Price: </h2>
+      <h4><%= humanized_money_with_symbol @order.total_cents / 100.0%></h4>
+      <br>
+      <h2> Email Address </h2>
+      <h4><%=@order.email%></h4>
+      
+
+    
+    
   </div>
 
-  <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
 </section>
